@@ -1,0 +1,15 @@
+@startuml
+
+Person o- Address
+
+class Person{
+    - name: String
+    - age: int
+    - height: double
+
+    + setName(name: String): void
+    + setAge(age: int): void
+    + setHeight(height: double): void
+}
+
+@enduml
