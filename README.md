@@ -310,3 +310,152 @@ The `toString` function of the above classes should return text as given below:
 | Square    | A Square with side=xxx, which is a subclass of yyy (where yyy is the output of the toString() method from the superclass)                    |
 
 In the `main()` method of a Program class, create an array of 10 `Shape` references containing a mixture of `Circle`, `Rectangle` and `Square` objects of different dimensions. Using a loop, print the `perimeter` and `area` for all of them.
+
+---
+
+![](concepts3.dio.png)
+
+![](./out/interfaces/interfaces.png)
+
+### Assignment 15
+
+Interface _Movable_ and its implementations _MovablePoint_ and _MovableCircle_
+
+Write two concrete classes - MovablePoint and MovableCircle - that implement the Movable interface.
+
+![](images/ExerciseOOP_Movable.png)
+
+For the MovablePoint class, declare the instance variable x, y, xSpeed and ySpeed with package access as shown with '~' in the class diagram (i.e., classes in the same package can access these variables directly). For the MovableCircle class, use a MovablePoint to represent its center (which contains four variable x, y, xSpeed and ySpeed). In other words, the MovableCircle composes a MovablePoint, and its radius.
+
+```java
+public class MovablePoint implements Movable {
+   // instance variables
+   int x, y, xSpeed, ySpeed;     // package access
+
+   // Constructor
+   public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+      this.x = x;
+      ......
+   }
+   ......
+
+   // Implement abstract methods declared in the interface Movable
+   @Override
+   public void moveUp() {
+      y -= ySpeed;   // y-axis pointing down for 2D graphics
+   }
+   ......
+}
+```
+
+```java
+public class MovableCircle implements Movable { // saved as "MovableCircle.java"
+   // instance variables
+   private MovablePoint center;   // can use center.x, center.y directly
+                                  //  because they are package accessible
+   private int radius;
+
+   // Constructor
+   public MovableCircle(int x, int y, int xSpeed, int ySpeed, int radius) {
+      // Call the MovablePoint's constructor to allocate the center instance.
+      center = new MovablePoint(x, y, xSpeed, ySpeed);
+      ......
+   }
+   ......
+
+   // Implement abstract methods declared in the interface Movable
+   @Override
+   public void moveUp() {
+      center.y -= center.ySpeed;
+   }
+   ......
+}
+```
+
+Write a test program and try out these statements:
+
+```java
+Movable m1 = new MovablePoint(5, 6, 10, 15);     // upcast
+System.out.println(m1);
+m1.moveLeft();
+System.out.println(m1);
+
+Movable m2 = new MovableCircle(1, 2, 3, 4, 20);  // upcast
+System.out.println(m2);
+m2.moveRight();
+System.out.println(m2);
+```
+
+Write a new class called _MovableRectangle_, which composes two _MovablePoint_ objects (representing the top-left and bottom-right corners) and implementing the _Movable_ Interface. Make sure that the two points has the same speed.
+
+![](images/ExerciseOOP_MovableRectangle.png)
+
+In the test program, add the following code to test the new implementation:
+
+```java
+
+Movable m3 = new MovableRectangle(1, 2, 3, 4, 25, 35);  // upcast
+System.out.println(m3);
+m3.moveUp();
+System.out.println(m3);
+```
+
+---
+
+### Assignment 16
+
+Write a Java application to accept integers in a loop. After each number is accepted, the user should be asked if he/she wishes to continue. If the user inputs "NO", then the loop should be stopped and following output should be displayed:
+
+```
+Number of inputs = X
+Number of integer inputs = Y
+Number of non-integer inputs = Z
+Sum of all integer inputs = XX
+The integer inputs = N1, N2, N3, ...
+The non-integer inputs = ASD, SDF, DFG, ...
+X, Y, Z, etc should be actual values, based on the inputs.
+```
+
+HINT:
+
+Use `java.util.Scanner` for accepting data from the user.
+
+```java
+Scanner s = new Scanner(System.in);
+String input = s.nextLine();
+int n = s.nextInt();
+double d = s.nextDouble();
+// ... s
+```
+
+---
+
+### Assignment 17
+
+Write a function called "calendar" that takes a String representing year/month in YYYY-MM format and returns a two-dimensional array representing the calendar for the input month and year.
+
+For example, if the input is "2018-03”, then the output is:
+
+```
+{
+	{0, 0, 0, 0, 1, 2, 3},
+	{4, 5, 6, 7, 8, 9, 10},
+	{11, 12, 13, 14, 15, 16, 17},
+	{18, 19, 20, 21, 22, 23, 24},
+	{25, 26, 27, 28, 29, 30, 31}
+}
+```
+
+For input "2018-02", the output should be:
+
+```
+{
+	{0, 0, 0, 0, 1, 2, 3},
+	{4, 5, 6, 7, 8, 9 10},
+	{11, 12, 13, 14, 15, 16, 17},
+	{18, 19, 20, 21, 22, 23, 24},
+	{25, 26, 27, 28, 0, 0, 0}
+}
+```
+
+The method should throw a custom exception **InvalidDateException**, in case if the input does not represent a valid year/month combination, and **InvalidInputException** in case if the input is not in the expected YYYY-MM format.

@@ -1,0 +1,34 @@
+@startuml
+
+
+class Phone {
+
+    + dial(): void
+    + ring(): void
+}
+
+class SmartPhone {
+
+    + play(): int
+    + play(): void
+}
+Phone <|-- SmartPhone
+
+interface Camera{
+    + takePhoto(): void
+    + play(): int
+}
+
+Camera <|... SmartPhone
+
+Camera <|... DigitalCamera
+
+Camera <|... WebCam
+
+interface MusicPlayer{
+    + play(): void
+}
+
+MusicPlayer <|... SmartPhone
+
+@enduml
