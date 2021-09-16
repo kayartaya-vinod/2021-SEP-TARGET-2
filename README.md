@@ -459,3 +459,72 @@ For input "2018-02", the output should be:
 ```
 
 The method should throw a custom exception **InvalidDateException**, in case if the input does not represent a valid year/month combination, and **InvalidInputException** in case if the input is not in the expected YYYY-MM format.
+
+---
+
+![](./concepts4.dio.png)
+
+---
+
+### Assignment 18
+
+Class: _com.kvinod.training.entity.Contact_
+
+```java
+public class Contact {
+
+	private int id;
+	private String firstname;
+	private String lastname;
+	private Gender gender = Gender.MALE;
+	private String email;
+	private String phone;
+	private String address;
+	private String city = "Bangalore";
+	private String state = "Karnataka";
+	private Integer pincode;
+	private String country = "India";
+	private Date birthDate;
+
+	// constructor/s
+
+	// getters and setters
+
+   // toString
+
+}
+```
+
+Interface _com.kvinod.training.dao.ContactsDao_
+
+```java
+public interface ContactsDao {
+	// CRUD operations
+	public void addContact(Contact contact) throws DaoException;
+	public Contact getContact(int id) throws DaoException;
+	public void updateContact(Contact contact) throws DaoException;
+	public void deleteContact(int id) throws DaoException;
+
+	// Queries
+	public Contact getContactByEmail(String email) throws DaoException;
+	public Contact getContactByPhone(String phone) throws DaoException;
+	public List<Contact> getContactsByLastname(String lastname) throws DaoException;
+	public List<Contact> getContactsByCity(String city) throws DaoException;
+	public List<Contact> getContacts() throws DaoException;
+	public List<Contact> getContactsByBirthDate(Date from, Date to) throws DaoException;
+}
+```
+
+Create an implementation for the above interface that uses collections for storing/manipulating the data. Note that the data will be available only till the time application is running. So, initialize few contacts in the constructor.
+
+## Create a menu driven application using Java to provide the following options:
+
+1. Add new contact
+2. List all contacts
+3. Search by lastname
+4. Search by email address
+5. Search by phone number
+6. Search by city
+7. Search by date of birth range
+8. Delete contact
+9. Edit contact

@@ -1,0 +1,52 @@
+@startuml
+
+interface Collection
+
+interface List
+
+interface Set
+
+' interface Queue
+
+Collection <|-- List
+Collection <|-- Set
+' Collection <|-- Queue
+
+note "List is a ordered collection of values. \nProvides index based operations" as n1
+
+n1 ... List
+
+List <|... Vector
+List <|... ArrayList
+List <|... LinkedList
+
+Vector <|-- Stack
+
+note "Set objects do not contain duplicats.\nNo additional functions provided by Set." as n2
+n2 ... Set
+
+Set <|... HashSet
+Set <|... LinkedHashSet
+Set <|... TreeSet
+
+note "Use vector, if the collection is required\nto be shared to multiple threads." as n3
+
+n3 ... Vector
+
+note "Preferred type of List" as n4
+
+n4 ... ArrayList
+
+note "Uses a doubly-linked list.\nPreferred if insertion or deletion of elements \nat random index is done often." as n5
+
+n5 ... LinkedList
+
+note "Order of insertion and retrieval is not guaranteed to be same.\nGuaranteed that no duplicates." as n6
+
+n6 ... HashSet
+
+
+note "Order of insertion and retrieval is guaranteed to be same.\nand no duplicates." as n7
+
+n7 ... LinkedHashSet
+@enduml
