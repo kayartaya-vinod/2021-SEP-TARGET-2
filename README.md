@@ -466,6 +466,10 @@ The method should throw a custom exception **InvalidDateException**, in case if 
 
 ---
 
+![](./out/collections/collections.pu)
+
+---
+
 ### Assignment 18
 
 Class: _com.kvinod.training.entity.Contact_
