@@ -466,7 +466,7 @@ The method should throw a custom exception **InvalidDateException**, in case if 
 
 ---
 
-![](./out/collections/collections.pu)
+![](./out/collections/collections.png)
 
 ---
 
