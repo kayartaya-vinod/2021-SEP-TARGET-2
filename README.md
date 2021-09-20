@@ -533,8 +533,7 @@ Create an implementation for the above interface that uses collections for stori
 8. Delete contact
 9. Edit contact
 
-
-----
+---
 
 ![](concepts5.dio.png)
 
@@ -674,3 +673,5 @@ In the application, you may want to change `ContactsDao dao = new ArrayListConta
 #### Food for thought!
 
 Is there a better way to get an object of ContactsDao interface?
+
+![](./concepts6.dio.png)
