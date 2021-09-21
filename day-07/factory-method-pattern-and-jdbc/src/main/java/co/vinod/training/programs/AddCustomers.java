@@ -24,7 +24,7 @@ public class AddCustomers {
             do {
                 try {
                     id = KeyboardUtil.getInt("Enter id      : ");
-                    name = KeyboardUtil.getString("Enter name    : ");
+                    name = KeyboardUtil.getString("Enter name    : "); // Vijay', 'v@j.com', 'mysore') --
                     email = KeyboardUtil.getString("Enter email   : ");
                     city = KeyboardUtil.getString("Enter city    : ");
 
