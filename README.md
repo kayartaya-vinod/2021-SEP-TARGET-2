@@ -1,6 +1,6 @@
 # Java bootcamp training for Target - September 2021
 
-![](./concepts1.dio.png)
+![](./images/concepts1.dio.png)
 
 # Assignments for Day 1
 
@@ -246,7 +246,7 @@ inWords(101);
 
 Call the function in main, multiple times by supplying multiple values and verify the same.
 
-![](./concepts2.dio.png)
+![](./images/concepts2.dio.png)
 
 # Assignments for Day 2
 
@@ -462,7 +462,7 @@ The method should throw a custom exception **InvalidDateException**, in case if 
 
 ---
 
-![](./concepts4.dio.png)
+![](./images/concepts4.dio.png)
 
 ---
 
@@ -674,4 +674,4 @@ In the application, you may want to change `ContactsDao dao = new ArrayListConta
 
 Is there a better way to get an object of ContactsDao interface?
 
-![](./concepts6.dio.png)
+![](./images/concepts6.dio.png)
