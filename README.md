@@ -685,3 +685,61 @@ Is there a better way to get an object of ContactsDao interface?
 ### Assignment
 
 Implement the _ContactsDao_ interface using JDBC and test the functionalities of the application. Also use the factory method pattern to get an object of _ContactsDao_ in your application.
+
+---
+
+### To run MySQL server as a docker container:
+
+````
+
+docker run -d -p 3306:3306 --name mysql8server --rm -e MYSQL_ROOT_PASSWORD=Welcome#123 -v mysql_data:/var/lib/mysql mysql
+
+docker logs mysql8server
+
+docker exec -it mysql8server sh
+
+alternatively,
+
+docker exec -it mysql8server mysql -uroot -pWelcome#123
+
+```
+
+MySQL commands:
+
+````
+
+show databases;
+create database target_batch2_db;
+use target_batch2_db;
+show tables;
+
+```
+
+### To create a postgres docker container:
+
+```
+
+docker run -dp 2345:5432 --name postgres -e POSTGRES_PASSWORD=Welcome#123 -v postgres_data:/var/lib/postgresql/data postgres:alpine
+
+docker logs postgres
+
+docker exec -it postgres psql -U postgres
+
+```
+
+Some useful postgres CLI commands:
+
+```
+
+\l --> list all databases
+\c --> connect to a database
+\d --> list all tables
+\dt
+\dp
+\z
+
+```
+
+
+![](./images/concepts8.dio.png)
+```

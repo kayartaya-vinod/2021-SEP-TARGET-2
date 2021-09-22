@@ -1,13 +1,32 @@
 package co.vinod.training.dao;
 
 import co.vinod.training.entity.Customer;
+import co.vinod.training.utils.DbUtil;
+import co.vinod.training.utils.KeyboardUtil;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcCustomerDao implements CustomerDao{
+public class JdbcCustomerDao implements CustomerDao {
     @Override
     public void addCustomer(Customer customer) throws DaoException {
-        throw new DaoException("Method not implemented using JDBC yet!");
+        String sql = "insert into customers values (?, ?, ?, ?)";
+        try (
+                Connection conn = DbUtil.createConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql); // sql insert command without values goes to the server
+        ) {
+            stmt.setInt(1, customer.getId());
+            stmt.setString(2, customer.getName());
+            stmt.setString(3, customer.getEmail());
+            stmt.setString(4, customer.getCity());
+            stmt.execute(); // visit the server again, carrying values for all parameters
+        } catch (Exception e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
@@ -22,7 +41,27 @@ public class JdbcCustomerDao implements CustomerDao{
 
     @Override
     public List<Customer> getAll() throws DaoException {
-        throw new DaoException("Method not implemented using JDBC yet!");
+        List<Customer> list = new ArrayList<>();
+        String sql = "select * from customers";
+
+        try (
+                Connection conn = DbUtil.createConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql); // visit to db server
+        ) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String city = rs.getString("city");
+                Customer c = new Customer(id, name, email, city);
+                list.add(c);
+            }
+
+        } catch (Exception e) {
+            throw new DaoException(e); // decorator pattern; wrap one type of exception with another
+        }
+        return list;
     }
 
     @Override

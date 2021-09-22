@@ -26,7 +26,7 @@ public final class DaoFactory {
             case "jpa":
                 // dao= new JpaCustomerDao(); break;
             case "hashmap":
-                // dao= new HashMapCustomerDao(); break;
+                 dao= new HashMapCustomerDao(); break;
             case "csv":
                 // dao= new CsvCustomerDao(); break;
             default:
