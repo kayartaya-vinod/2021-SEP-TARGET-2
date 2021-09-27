@@ -45,10 +45,54 @@ public class App {
                 case 5:
                     System.out.println("Search by city - TDB");
                     break;
+                case 6:
+                    acceptAndUpdateCustomerData();
             }
         }
 
         System.out.println("Bye!");
+    }
+
+    private void acceptAndUpdateCustomerData() {
+        try {
+            int id = KeyboardUtil.getInt("Enter customer id to search: ");
+            Customer c = dao.getById(id);
+            if (c == null) {
+                System.out.println("No customer data found for id " + id);
+                return;
+            }
+
+            System.out.println("Please input new details for customer. Hit RETURN to keep old value.");
+
+            String input;
+            boolean changed = false;
+
+            input = KeyboardUtil.getString("Enter name: (" + c.getName() + ") ");
+            if (!input.trim().equals("")) {
+                c.setName(input);
+                changed = true;
+            }
+            input = KeyboardUtil.getString("Enter email: (" + c.getEmail() + ") ");
+            if (!input.trim().equals("")) {
+                c.setEmail(input);
+                changed = true;
+            }
+            input = KeyboardUtil.getString("Enter city: (" + c.getCity() + ") ");
+            if (!input.trim().equals("")) {
+                c.setCity(input);
+                changed = true;
+            }
+
+            if (changed) {
+                dao.updateCustomer(c);
+                System.out.println("Data updated successfully for id " + id);
+            } else {
+                System.out.println("Nothing changed, not updating!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Only number is allowed for id!");
+        }
     }
 
     private void acceptAndAddCustomerData() {
@@ -97,17 +141,18 @@ public class App {
             System.out.println("3. Search by id");
             System.out.println("4. Search by email");
             System.out.println("5. Search by city");
+            System.out.println("6. Update customer data");
 
             try {
                 choice = KeyboardUtil.getInt("Enter your choice: ");
-                if (choice < 0 || choice > 5) {
+                if (choice < 0 || choice > 6) {
                     System.out.println("Invalid choice; Please try again.");
                 }
             } catch (Exception e) {
                 System.out.println("Invalid choice; Please try again.");
             }
 
-        } while (choice < 0 || choice > 5);
+        } while (choice < 0 || choice > 6);
         return choice;
     }
 }

@@ -32,12 +32,44 @@ public class JdbcCustomerDao implements CustomerDao {
 
     @Override
     public Customer getById(Integer id) throws DaoException {
-        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
+        String sql = "select * from customers where id=?";
+        try (
+                Connection conn = DbUtil.createConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    Customer c = new Customer();
+                    c.setId(id);
+                    c.setName(rs.getString("name"));
+                    c.setEmail(rs.getString("email"));
+                    c.setCity(rs.getString("city"));
+                    return c;
+                }
+            }
+        } catch (Exception e) {
+            throw new DaoException(e); // decorator pattern; wrap one type of exception with another
+        }
+
+        return null;
     }
 
     @Override
     public void updateCustomer(Customer customer) throws DaoException {
-        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
+        String sql = "update customers set name=?, email=?, city=? where id=?";
+        try (
+                Connection conn = DbUtil.createConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setString(1, customer.getName());
+            stmt.setString(2, customer.getEmail());
+            stmt.setString(3, customer.getCity());
+            stmt.setInt(4, customer.getId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            throw new DaoException(e); // decorator pattern; wrap one type of exception with another
+        }
     }
 
     @Override
