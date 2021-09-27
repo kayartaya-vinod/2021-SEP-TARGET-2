@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public class ArrayListCustomerDao implements CustomerDao {
 
+    private static final String METHOD_NOT_IMPLEMENTED_YET = "Method not implemented yet!";
     List<Customer> list = new ArrayList<>();
 
     public ArrayListCustomerDao() {
@@ -28,7 +29,7 @@ public class ArrayListCustomerDao implements CustomerDao {
         if (customer.getId() == null || customer.getId() <= 0) {
             throw new DaoException("Customer id cannot be null, 0 or negative!");
         }
-        Optional<Customer> cust = list.stream().filter(c -> c.getId() == customer.getId()).findAny();
+        Optional<Customer> cust = list.stream().filter(c -> c.getId().equals(customer.getId())).findAny();
         if (cust.isPresent()) {
             throw new DaoException("Customer with id " + customer.getId() + " already exists!");
         }
@@ -42,12 +43,12 @@ public class ArrayListCustomerDao implements CustomerDao {
 
     @Override
     public Customer getById(Integer id) throws DaoException {
-        throw new DaoException("Method not implemented yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 
     @Override
     public void updateCustomer(Customer customer) throws DaoException {
-        throw new DaoException("Method not implemented yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 
     @Override
@@ -57,11 +58,11 @@ public class ArrayListCustomerDao implements CustomerDao {
 
     @Override
     public List<Customer> getByCity(String city) throws DaoException {
-        throw new DaoException("Method not implemented yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 
     @Override
     public Customer getByEmail(String email) throws DaoException {
-        throw new DaoException("Method not implemented yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 }

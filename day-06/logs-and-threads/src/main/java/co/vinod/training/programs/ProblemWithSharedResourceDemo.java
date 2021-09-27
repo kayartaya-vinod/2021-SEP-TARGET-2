@@ -23,7 +23,7 @@ public class ProblemWithSharedResourceDemo {
                  BufferedReader in = new BufferedReader(reader)) {
                 String line;
                 while ((line = in.readLine()) != null) {
-                    synchronized (list) {
+                    synchronized (this) {
                         list.add(line);
                     }
                 }
@@ -51,7 +51,7 @@ public class ProblemWithSharedResourceDemo {
         // we want all threads to finish their work, and only then we want to go forward from here:
         threads.forEach(ProblemWithSharedResourceDemo::threadJoin);
 
-        System.out.println("Content of sharedList is: ");
-        sharedList.forEach(System.out::println);
+        log.debug("Content of sharedList is: ");
+        sharedList.forEach(log::debug);
     }
 }

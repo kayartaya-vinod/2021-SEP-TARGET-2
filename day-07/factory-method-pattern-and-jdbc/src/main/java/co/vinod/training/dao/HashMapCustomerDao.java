@@ -23,7 +23,7 @@ public class HashMapCustomerDao implements CustomerDao{
 
     @Override
     public void updateCustomer(Customer customer) throws DaoException {
-
+        throw new DaoException("Method not implemented yet");
     }
 
     @Override
@@ -35,12 +35,11 @@ public class HashMapCustomerDao implements CustomerDao{
 
     @Override
     public List<Customer> getByCity(String city) throws DaoException {
-        List<Customer> list = customers
+        return customers
                 .values()
                 .stream()
                 .filter(c->c.getCity().equals(city))
                 .collect(Collectors.toList());
-        return list;
     }
 
     @Override

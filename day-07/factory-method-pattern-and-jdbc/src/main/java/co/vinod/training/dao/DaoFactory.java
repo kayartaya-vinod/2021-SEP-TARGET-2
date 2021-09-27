@@ -23,14 +23,12 @@ public final class DaoFactory {
             case "jdbc":
                 dao = new JdbcCustomerDao();
                 break;
-            case "jpa":
-                // dao= new JpaCustomerDao(); break;
             case "hashmap":
-                 dao= new HashMapCustomerDao(); break;
+                dao= new HashMapCustomerDao(); break;
+            case "jpa":
             case "csv":
-                // dao= new CsvCustomerDao(); break;
             default:
-                throw new DaoException("CustomerDao implemention using " + discriminator + " is not available");
+                throw new DaoException("CustomerDao implementation using " + discriminator + " is not available");
         }
         return dao;
     }

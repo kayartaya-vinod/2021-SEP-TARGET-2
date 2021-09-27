@@ -740,6 +740,8 @@ Some useful postgres CLI commands:
 
 ```
 
+```
 
 ![](./images/concepts8.dio.png)
-```
+
+![](./images/concepts10.dio.png)

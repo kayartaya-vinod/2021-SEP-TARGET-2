@@ -2,7 +2,6 @@ package co.vinod.training.dao;
 
 import co.vinod.training.entity.Customer;
 import co.vinod.training.utils.DbUtil;
-import co.vinod.training.utils.KeyboardUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcCustomerDao implements CustomerDao {
+    private static final String METHOD_NOT_IMPLEMENTED_YET = "Method not implemented using JDBC yet!";
+
     @Override
     public void addCustomer(Customer customer) throws DaoException {
         String sql = "insert into customers values (?, ?, ?, ?)";
@@ -31,12 +32,12 @@ public class JdbcCustomerDao implements CustomerDao {
 
     @Override
     public Customer getById(Integer id) throws DaoException {
-        throw new DaoException("Method not implemented using JDBC yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 
     @Override
     public void updateCustomer(Customer customer) throws DaoException {
-        throw new DaoException("Method not implemented using JDBC yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 
     @Override
@@ -66,11 +67,11 @@ public class JdbcCustomerDao implements CustomerDao {
 
     @Override
     public List<Customer> getByCity(String city) throws DaoException {
-        throw new DaoException("Method not implemented using JDBC yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 
     @Override
     public Customer getByEmail(String email) throws DaoException {
-        throw new DaoException("Method not implemented using JDBC yet!");
+        throw new DaoException(METHOD_NOT_IMPLEMENTED_YET);
     }
 }
