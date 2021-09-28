@@ -747,3 +747,11 @@ Some useful postgres CLI commands:
 ![](./images/concepts10.dio.png)
 
 ![](https://miro.medium.com/max/1400/1*20C_-0TYrmq9mhe2S0VtoQ.png)
+
+HTTP RESPONSE CODES (FROM MOZILLA DEVELOPER NETWORK):
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses
+
+UDEMY COURSE LINK:
+
+https://www.udemy.com/course/develop-java-mvc-web-apps-using-mybatis-servlets-and-jsp/?couponCode=76916B7065333B26361A
