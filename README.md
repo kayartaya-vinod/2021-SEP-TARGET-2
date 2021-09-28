@@ -745,3 +745,5 @@ Some useful postgres CLI commands:
 ![](./images/concepts8.dio.png)
 
 ![](./images/concepts10.dio.png)
+
+![](https://miro.medium.com/max/1400/1*20C_-0TYrmq9mhe2S0VtoQ.png)
