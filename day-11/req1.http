@@ -1,0 +1,23 @@
+GET /demo-webapp/
+Host: localhost:8080
+
+###
+
+GET /?s=cricket&apikey=aa9e49f
+Host: omdbapi.com
+
+###
+GET /demo-webapp/hello
+Host: localhost:8080
+
+###
+GET /demo-webapp/hello?username=Vinod
+Host: localhost:8080
+
+###
+
+POST /demo-webapp/hello 
+Host: localhost:8080
+Content-Type: application/x-www-form-urlencoded
+
+username=Shyam

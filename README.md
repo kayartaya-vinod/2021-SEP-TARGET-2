@@ -755,3 +755,5 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses
 UDEMY COURSE LINK:
 
 https://www.udemy.com/course/develop-java-mvc-web-apps-using-mybatis-servlets-and-jsp/?couponCode=76916B7065333B26361A
+
+![](./images/concepts11.dio.png)
