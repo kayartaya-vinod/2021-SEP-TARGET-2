@@ -758,6 +758,73 @@ https://www.udemy.com/course/develop-java-mvc-web-apps-using-mybatis-servlets-an
 
 ![](./images/concepts11.dio.png)
 
-## ReSTful web services or APIs
+## SOAP Web service architecture
 
 ![](./images/concepts13.dio.png)
+
+## What is a Web service?
+
+--> Service offered/available on the web!
+--> An application can make use of these services
+
+```xml
+<customer>
+	<id>1122</id>
+	<name>
+		<first>Vinod</first>
+		<last>Kumar</last>
+	</name>
+	<address>
+		<street>1st cross 1st main</street>
+		<area>ISRO layout</area>
+		<city>Bangalore</city>
+	</address>
+</customer>
+```
+
+```java
+Customer c = new Customer();
+c.setId(1122);
+c.setName(new Fullname("Vinod", "Kumar"));
+c.setAddress(new Address("..", "..", ".."));
+
+```
+
+## ReSTful web services or APIs
+
+### ReST --> Representational State Transfer
+
+-   Transfer (exchange) of state (information) in different representations (formats)
+-   Client alwasy initiates request for a resource on the server
+-   Examples of state/ resources -> Flights, Products, Movies, Students, ExamResult, Employees, Accounts, Loans, ...
+-   Different representations --> XML, JSON (most widely/commonly used today), CSV, plain text, html, pdf, image, ..
+
+## 6 constraints that dictate REST
+
+### 1. Uniform interface
+
+-   URL or URI can be used to represent a resource
+    -   http://example.com/api/books --> represents a bunch of books
+    -   http://example.com/api/flights --> represents a resource of flights
+    -   Use HTTP verbs GET, POST, PUT, DELETE, PATCH to access/mutate the resource
+        -   For example, on the URI http://example.com/api/books/8723 a GET request should fetch the book with id 8723
+        -   but the same URI with a DELETE request should simply delete the book with id 8723
+        -   an update to the book can be done using the URI but with PUT or PATCH request
+        -   By sending a HTTP request header called Accept we can negotiate for a specific representation
+            -   For example, a GET request, with Accept="application/json" for http://example.com/api/books/8723 should return a JSON version while Accept="application/xml" should return the XML variant. This is called content negotiation (conneg)
+
+### 2. Stateless
+
+-   Server doesn't or needn't remember the client
+-   No server side session management
+-   HTTP protocol is stateless by default
+
+### 3. Client/Server
+
+### 4. Cacheable
+
+### 5. Layered system
+
+### 6. Code on demand (optional)
+
+-   Google maps api provides services that return JSON data related to a coords, but also provides a software to draw the map on the browser/mobile app.
