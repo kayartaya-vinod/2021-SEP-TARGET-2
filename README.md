@@ -757,3 +757,7 @@ UDEMY COURSE LINK:
 https://www.udemy.com/course/develop-java-mvc-web-apps-using-mybatis-servlets-and-jsp/?couponCode=76916B7065333B26361A
 
 ![](./images/concepts11.dio.png)
+
+## ReSTful web services or APIs
+
+![](./images/concepts13.dio.png)
