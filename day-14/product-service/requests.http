@@ -1,0 +1,39 @@
+GET /api/products/324
+Host: localhost:5000
+Accept: application/json
+
+###
+GET /api/products/232
+Host: localhost:5000
+Accept: application/xml
+
+###
+GET /api/products/23
+Host: localhost:5000
+Accept: text/plain
+
+### -- all products (page 1) in JSON array format.
+GET /api/products
+Host: localhost:5000
+Accept: application/json
+
+### -- products from specified page (assuming pagesize=10)
+GET /api/products?_page=3
+Host: localhost:5000
+Accept: application/json
+### -- products from specified page and page-limit
+GET /api/products?_page=3&_limit=15
+Host: localhost:5000
+Accept: application/json
+
+###
+GET /api/products/not-in-stock
+Host: localhost:5000
+Accept: application/json
+
+###
+GET /api/products/by-price?min=100&max=1000
+Host: localhost:5000
+Accept: application/json
+
+###

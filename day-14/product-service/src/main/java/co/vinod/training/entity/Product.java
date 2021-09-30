@@ -4,8 +4,9 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement // to authorize JAXB to convert object into xml
 @Data
 @Entity
 @Table(name = "PRODUCTS")
@@ -17,6 +18,10 @@ public class Product {
     private Integer productId;
     @Column(name = "PRODUCT_NAME")
     private String productName;
+    @Column(name = "CATEGORY_ID")
+    private Integer categoryId;
+    @Column(name = "SUPPLIER_ID")
+    private Integer supplierId;
     @Column(name = "QUANTITY_PER_UNIT")
     private String quantityPerUnit;
     @Column(name = "UNIT_PRICE")
@@ -28,15 +33,4 @@ public class Product {
     @Column(name = "REORDER_LEVEL")
     private Integer reorderLevel;
     private Integer discontinued;
-
-    @ManyToOne
-    @JoinColumn(name="CATEGORY_ID")
-    private Category category;
-
-    @OneToMany
-    @JoinColumn(name="PRODUCT_ID")
-    private List<LineItem> lineItems;
-
-
-
 }
