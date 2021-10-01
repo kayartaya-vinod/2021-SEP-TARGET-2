@@ -829,4 +829,6 @@ c.setAddress(new Address("..", "..", ".."));
 
 -   Google maps api provides services that return JSON data related to a coords, but also provides a software to draw the map on the browser/mobile app.
 
+---
+
 ![](./images/concepts14.dio.png)
