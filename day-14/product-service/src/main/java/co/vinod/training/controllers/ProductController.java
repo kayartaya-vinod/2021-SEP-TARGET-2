@@ -45,14 +45,50 @@ public class ProductController {
     }
 
     @GetMapping("/not-in-stock")
-    public Iterable<Product> handleGetOutOfStockProducts(){
+    public Iterable<Product> handleGetOutOfStockProducts() {
         return service.getOutOfStockProducts();
     }
 
     // /api/products/by-price?min=50&max=100
     @GetMapping("/by-price")
     public Iterable<Product> handleGetProductsByPriceRange(
-            @RequestParam Double min, @RequestParam Double max){
+            @RequestParam Double min, @RequestParam Double max) {
         return service.getProductsInPriceRange(min, max);
     }
+
+    // @RequestMapping(method = RequestMethod.POST)
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> handleAddNewProduct(@RequestBody Product product) {
+        try {
+            Product p = service.addNewProduct(product);
+            return ResponseEntity.ok(p); // status=200
+        } catch (Exception e) {
+            ApiError err = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+        }
+    }
+
+
+    @PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> handleUpdateProduct(@PathVariable Integer id, @RequestBody Product product) {
+        try {
+            product.setProductId(id); // override the payload's id with path-variable id
+            Product p = service.updateProduct(product);
+            return ResponseEntity.ok(p); // status=200
+        } catch (Exception e) {
+            ApiError err = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+        }
+    }
+
+    @DeleteMapping(path = "/{id}", produces = "application/json")
+    public ResponseEntity<Object> handleDeleteProduct(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(service.deleteProduct(id)); // status=200
+        } catch (Exception e) {
+            ApiError err = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+        }
+    }
+
 }

@@ -1,14 +1,14 @@
 server:
-  port: 5000
+  port: ${APP_PORT:5000}
 
 spring:
   application:
     name: PRODUCT-SERVICE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/northwind
-    username: root
-    password: Welcome#123
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:northwind}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:Welcome#123}
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,6 +21,6 @@ logging:
       vinod: TRACE
     org:
       springframework: INFO
-      hibernate: DEBUG
+      hibernate: INFO
 
 #debug: true

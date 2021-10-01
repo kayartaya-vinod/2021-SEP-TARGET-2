@@ -1,9 +1,9 @@
-GET /api/products/324
-Host: localhost:5000
+GET /api/products/44
+Host: localhost:6000
 Accept: application/json
 
 ###
-GET /api/products/232
+GET /api/products/44
 Host: localhost:5000
 Accept: application/xml
 
@@ -36,4 +36,46 @@ GET /api/products/by-price?min=100&max=1000
 Host: localhost:5000
 Accept: application/json
 
+### 
+
+POST /api/products
+Host: localhost:5000
+Accept: application/json
+Content-Type: application/json
+
+{
+    "productName": "Vanilla Milkshake",
+    "categoryId": 1,
+    "supplierId": 1,
+    "quantityPerUnit": "10 boxes x 20 tetrapacks",
+    "unitPrice": 2.5,
+    "unitsInStock": 20,
+    "unitsOnOrder": 0,
+    "reorderLevel": 5,
+    "discontinued": 0
+}
+
+### update an existing product details
+
+PUT /api/products/78
+Host: localhost:5000
+Accept: application/json
+Content-Type: application/json
+
+{
+    "productId": 54,
+    "productName": "Vanilla Milkshake",
+    "categoryId": 1,
+    "supplierId": 1,
+    "quantityPerUnit": "10 boxes x 20 tetrapacks",
+    "unitPrice": 3.5,
+    "unitsInStock": 10,
+    "unitsOnOrder": 4,
+    "reorderLevel": 5,
+    "discontinued": 0
+}
+
 ###
+DELETE /api/products/78
+Host: localhost:5000
+Accept: application/json
