@@ -1,0 +1,28 @@
+version: '3'
+
+services: # docker run
+    mysql8server:
+        container_name: mysql8server # --name mysql8server
+        ports: # -p 3306:3306 -p 33060:33060
+            - '3306:3306'
+            - '33060:33060'
+        volumes: # -v mysql_data:/var/lib/mysql
+            - 'mysql_data:/var/lib/mysql'
+        environment: # -e MYSQL_ROOT_PASSWORD=Welcome#123
+            - MYSQL_ROOT_PASSWORD=Welcome#123
+        image: 'mysql:latest' # mysql:latest
+
+    employee-service:
+        container_name: EMPLOYEE_SERVICE
+        ports:
+            - '9090:9090'
+        environment:
+            - MYSQL_HOST=mysql8server
+        depends_on:
+            - mysql8server
+        image: 'employee-service:latest'
+
+volumes:
+    mysql_data:
+        name: mysql_data
+        driver: local
