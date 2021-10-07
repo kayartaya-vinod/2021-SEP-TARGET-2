@@ -11,6 +11,24 @@ services: # docker run
         environment: # -e MYSQL_ROOT_PASSWORD=Welcome#123
             - MYSQL_ROOT_PASSWORD=Welcome#123
         image: 'mysql:latest' # mysql:latest
+        depends_on:
+            - fluentd
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    eureka-service:
+        container_name: eureka-service
+        ports:
+            - '8761:8761'
+        image: 'eureka-service:latest'
+        depends_on:
+            - fluentd
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
 
     employee-service:
         container_name: EMPLOYEE_SERVICE
@@ -18,9 +36,152 @@ services: # docker run
             - '9090:9090'
         environment:
             - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
         depends_on:
             - mysql8server
+            - eureka-service
+            - fluentd
         image: 'employee-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd # name of the service defined at the bottom
+
+    product-service:
+        container_name: PRODUCT_SERVICE
+        ports:
+            - '9091:9091'
+        environment:
+            - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
+            - APP_PORT=9091
+        depends_on:
+            - mysql8server
+            - eureka-service
+            - fluentd
+        image: 'product-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    product-service-2:
+        container_name: PRODUCT_SERVICE_2
+        ports:
+            - '9094:9094'
+        environment:
+            - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
+            - APP_PORT=9094
+        depends_on:
+            - mysql8server
+            - eureka-service
+            - fluentd
+        image: 'product-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    product-service-3:
+        container_name: PRODUCT_SERVICE_3
+        ports:
+            - '9095:9095'
+        environment:
+            - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
+            - APP_PORT=9095
+        depends_on:
+            - mysql8server
+            - eureka-service
+            - fluentd
+        image: 'product-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    product-service-4:
+        container_name: PRODUCT_SERVICE_4
+        ports:
+            - '7766:9988'
+        environment:
+            - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
+            - APP_PORT=9988
+        depends_on:
+            - mysql8server
+            - eureka-service
+            - fluentd
+        image: 'product-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    customer-service:
+        container_name: CUSTOMER_SERVICE
+        ports:
+            - '9092:9092'
+        environment:
+            - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
+            - SERVER_PORT=9092
+        depends_on:
+            - mysql8server
+            - eureka-service
+            - fluentd
+        image: 'customer-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    gateway-service:
+        container_name: GATEWAY_SERVICE
+        ports:
+            - '5000:5000'
+        environment:
+            - EUREKA_SERVER_HOST=eureka-service
+        depends_on:
+            - eureka-service
+            - fluentd
+        image: 'gateway-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+        container_name: elasticsearch
+        ports:
+            - '9200:9200'
+        environment:
+            - bootstrap.memory_lock=true
+            - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+    fluentd:
+        build: ./fluentd # location of Dockerfile
+        container_name: fluentd
+        ports:
+            - '24224:24224'
+            - '24224:24224/udp'
+        volumes:
+            - './fluentd/conf:/fluentd/etc'
+
+    kibana:
+        image: docker.elastic.co/kibana/kibana:6.5.4
+        container_name: kibana
+        environment:
+            - 'ELASTICSEARCH_URL=http://elasticsearch:9200'
+        ports:
+            - '5601:5601'
+        depends_on:
+            - elasticsearch
 
 volumes:
     mysql_data:

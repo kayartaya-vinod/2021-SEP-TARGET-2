@@ -7,7 +7,9 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.spring.web.plugins.Docket;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+@EnableEurekaClient
 @SpringBootApplication
 @EnableSwagger2 // loads swagger beans into the container and exposes endpoints: /v2/api-docs and /swagger-ui.html
 public class EmployeeServiceApplication {
