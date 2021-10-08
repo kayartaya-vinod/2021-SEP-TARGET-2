@@ -137,6 +137,26 @@ services: # docker run
             options:
                 fluentd-address: fluentd
 
+    order-service:
+        container_name: ORDER_SERVICE
+        ports:
+            - '9096:9096'
+        environment:
+            - MYSQL_HOST=mysql8server
+            - EUREKA_SERVER_HOST=eureka-service
+            - SERVER_PORT=9096
+            - CUSTOMER_SERVICE_HOST=customer-service # name or ip4address of the service defined above
+            - CUSTOMER_SERVICE_PORT=9092
+        depends_on:
+            - mysql8server
+            - eureka-service
+            - fluentd
+        image: 'order-service:latest'
+        logging:
+            driver: fluentd
+            options:
+                fluentd-address: fluentd
+
     gateway-service:
         container_name: GATEWAY_SERVICE
         ports:

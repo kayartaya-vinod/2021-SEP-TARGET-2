@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+    hello-service:
+        container_name: hello-service
+        build: ./hello-service
+        ports:
+            - '8080:8080'
+
+    prometheus-service:
+        container_name: prometheus-service
+        image: 'bitnami/prometheus:latest'
+        ports: ['9090:9090']
+        volumes:
+            - './config:/opt/bitnami/prometheus/conf'
+
+    grafana-service:
+        container_name: grafana-service
+        image: 'bitnami/grafana:latest'
+        ports: ['3000:3000']
+        environment:
+            - GF_SECURITY_ADMIN_PASSWORD=Welcome#123

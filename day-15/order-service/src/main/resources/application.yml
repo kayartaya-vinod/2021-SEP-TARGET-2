@@ -1,0 +1,43 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: ORDER-SERVICE
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/northwind
+    username: root
+    password: ${MYSQL_PASSWORD:Welcome#123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+logging:
+  level:
+    org:
+      hibernate: DEBUG
+      springframework: DEBUG
+    co:
+      vinod: DEBUG
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_HOST:localhost}:8761/eureka/
+  instance:
+    hostname: ${EUREKA_SERVER_HOST:localhost}
+    prefer-ip-address: true
+
+# custom properties
+microservices:
+  url:
+    customer-service: http://${CUSTOMER_SERVICE_HOST:localhost}:${CUSTOMER_SERVICE_PORT:8080}/api/customers/
+    employee-service: http://${EMPLOYEE_SERVICE_HOST:localhost}:${EMPLOYEE_SERVICE_PORT:8080}/api/employees/
+    shipper-service: http://${SHIPPER_SERVICE_HOST:localhost}:${SHIPPER_SERVICE_PORT:8080}/api/shippers/
+    product-service: http://${PRODUCTS_SERVICE_HOST:localhost}:${PRODUCTS_SERVICE_PORT:8080}/api/products/
+
