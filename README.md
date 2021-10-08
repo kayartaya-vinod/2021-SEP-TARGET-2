@@ -2,6 +2,8 @@
 
 ## You may reach me on _vinod@vinod.co_ or _9731424784_
 
+![](./images/target-batch-2.png)
+
 ![](./images/concepts1.dio.png)
 
 # Assignments for Day 1
